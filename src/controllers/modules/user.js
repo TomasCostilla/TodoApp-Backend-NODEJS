@@ -1,8 +1,11 @@
-const FirtGet = (req,res,next) =>{
-    res.json({
-        mensaje:'Primera Ruta del controller usuario'
-    })
-}
+const userController = () =>({
+    getUser(req,res,next){
+        res.json({
+            message: "it's works!"
+        })
+    },
+})
 
 
-module.exports = FirtGet;
+
+module.exports = userController;
