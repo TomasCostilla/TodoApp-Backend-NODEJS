@@ -1,10 +1,10 @@
 const express = require('express')
 const app = express()
-const routes = require('../routes')
-const models = require('../routes/routes')
-const apiRouter = routes(models)
+const routes = require('../routes/routes')
+const modules = require('../routes')
+const apiRouter = routes(modules)
 
-/* develop mode */
+/* main mode */
 
 app.use(apiRouter);
 
