@@ -1,5 +1,8 @@
-const {userService} = require('./services')
+const repositories = require('../dao/repository')
+const taskService = require('./modules/task')
+const userService = require('./modules/user')
 
 module.exports = {
-    userService: userService()
+    taskService: taskService(repositories),
+    userService: userService(repositories)
 }

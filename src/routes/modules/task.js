@@ -1,7 +1,8 @@
 
 module.exports = (router,{taskController}) =>{
     router
-        .get('/task',taskController.getTask)
+        .get('/task',taskController.getAllTaskController)
+        .post('/task',taskController.createTaskController)
 
     return router;
 }
