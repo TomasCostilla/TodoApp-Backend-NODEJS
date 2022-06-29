@@ -7,6 +7,12 @@ const userRepository = () =>({
     },
     async createUser(usr){
         return baseRepository.createObj(userModel,usr)
+    },
+    async findUserbyEmail(email){
+        return userModel.findOne({userEmail:email})
+    },
+    async findUserById(id){
+        return baseRepository.getById(userModel,id)
     }
 })
 

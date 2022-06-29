@@ -4,6 +4,12 @@ const userService = ({userRepository}) =>({
     },
     async createUserService(usr){
         return userRepository.createUser(usr)
+    },
+    async findUserbyEmailService(email){
+        return userRepository.findUserbyEmail(email)
+    },
+    async findUserbyIDService(id){
+        return userRepository.findUserById(id)
     }
 })
 

@@ -3,30 +3,28 @@ const {isValidPassword} = require('../../utils/bcrypt')
 const {userService} = require('../../services')
 const userModel = require('../../dao/db/models/user')
 
-const loginUsr = (passport) =>{
+
+module.exports = (passport) => {
     passport.use('login',new LocalStrategy({
         usernameField: 'userEmail',
         passwordField:'userPassword'
     },async (email,password,done)=>{
-        console.log(email)
-        console.log(password)
-        const user = await userModel.findOne({userEmail: email})
-    }))
-}
-
-module.exports = {
-    loginUsr
-}
-
-
-/* module.exports = (passport) => {
-    passport.use('login',new LocalStrategy({
-        usernameField: 'userEmail',
-        passwordField:'userPassword'
-    },async (email,password,done)=>{
-        console.log(email)
-        console.log(password)
-        const user = await userModel.findOne({userEmail: email})
+        const user = await userService.findUserbyEmailService(email)
+        if(!user) return done(null,false)
+        /* if(!isValidPassword(user,password))
+            return done(null,false,{message:'Contraseña invalida'}) */
+            
+        return done(null,user)  
     }))
 
-} */
+    passport.serializeUser((user, done) => {
+        done(null, user._id);
+    });
+
+    passport.deserializeUser(async(id, done) => {
+        userModel.findById(id, (err, user) => {
+          done(err, user);
+        });
+      });
+
+}

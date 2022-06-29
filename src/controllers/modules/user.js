@@ -6,7 +6,10 @@ const userController = ({userService}) =>({
         })
     },
     signInController(req,res){
-        res.json({msg:"usuario logueado"})
+        console.log(req.user)
+        res.status(200).json({
+            message:"Usuario logueado"
+        })
     },
     async signUpController(req,res,next){
          try {
@@ -17,7 +20,14 @@ const userController = ({userService}) =>({
          } catch (error) {
             res.status(400).json({msg:"Ocurrio un error inesperado"})
          }
-    }
+    },
+    sessionLogout(req,res){
+        console.log(req) 
+        res.json({ 
+                status: "logout",
+                msg:"Please Log In again"
+             });
+    },
 })
 
 
